@@ -18,3 +18,15 @@ export const crearTarea = async (req, res) => {
     });
   }
 };
+
+export const obtenerTareas = async (req, res) => {
+  try {
+    const tareas = await Tarea.find({}).select('-__v');
+    res.json(tareas);
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      message: 'Error al intentar crear una tarea',
+    });
+  }
+};
