@@ -1,14 +1,15 @@
 import { Router } from 'express';
 import {
-  controladorPrueba,
+  controladorTest,
   crearTarea,
+  obtenerTarea,
   obtenerTareas,
 } from '../controllers/tareas.controllers';
 
 const router = new Router();
 
-router.route('/prueba').get(controladorPrueba);
-router.route('/tareas').post(crearTarea);
-router.route('/tareas').get(obtenerTareas);
+router.route('/').get(controladorTest);
+router.route('/tareas').post(crearTarea).get(obtenerTareas);
+router.route('/tareas/:id').get(obtenerTarea);
 
 export default router;

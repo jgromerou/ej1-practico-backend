@@ -1,7 +1,7 @@
 import Tarea from '../models/tarea';
 
-export const controladorPrueba = (req, res) => {
-  res.send('Esta es una prueba de mi ruta GET de prueba');
+export const controladorTest = (req, res) => {
+  res.send('Este es un test de mi ruta GET de raíz');
 };
 
 export const crearTarea = async (req, res) => {
@@ -27,6 +27,18 @@ export const obtenerTareas = async (req, res) => {
     console.log(error);
     res.status(404).json({
       message: 'Error al intentar crear una tarea',
+    });
+  }
+};
+
+export const obtenerTarea = async (req, res) => {
+  try {
+    const tarea = await Tarea.findById(req.params.id);
+    res.status(200).json(tarea);
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      mensaje: 'Error al intentar obtener la tarea',
     });
   }
 };
