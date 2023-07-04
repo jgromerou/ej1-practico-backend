@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {
+  borrarTarea,
   controladorTest,
   crearTarea,
   obtenerTarea,
@@ -10,6 +11,6 @@ const router = new Router();
 
 router.route('/').get(controladorTest);
 router.route('/tareas').post(crearTarea).get(obtenerTareas);
-router.route('/tareas/:id').get(obtenerTarea);
+router.route('/tareas/:id').get(obtenerTarea).delete(borrarTarea);
 
 export default router;
