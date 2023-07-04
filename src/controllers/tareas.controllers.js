@@ -57,3 +57,18 @@ export const borrarTarea = async (req, res) => {
     });
   }
 };
+
+export const editarTarea = async (req, res) => {
+  try {
+    //buscar en la BD un documento tarea mediante el id y editarlo
+    await Tarea.findByIdAndUpdate(req.params.id, req.body);
+    res.status(200).json({
+      mensaje: 'La tarea fue editada correctamente.',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      mensaje: 'Error, no se pudo editar la tarea.',
+    });
+  }
+};
