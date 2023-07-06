@@ -1,4 +1,3 @@
-import { validationResult } from 'express-validator';
 import Tarea from '../models/tarea';
 
 export const controladorTest = (req, res) => {
@@ -7,21 +6,26 @@ export const controladorTest = (req, res) => {
 
 export const crearTarea = async (req, res) => {
   try {
-    //trabajar con los resultados de la validación
-    const errors = validationResult(req);
+    const { nombreTarea } = req.body;
 
-    //errors.isEmpty(); true: si está vacío, es false tiene errores
-    //quiero saber si hay errores
-    if (!errors.isEmpty()) {
+    //verificar si el email ya existe
+    let tarea = await Tarea.findOne({
+      nombreTarea: { $regex: nombreTarea, $options: 'i' },
+    }); //devulve un null
+    console.log(tarea);
+    if (tarea) {
+      //si el usuario existe
       return res.status(400).json({
-        errors: errors.array(),
+        mensaje: 'ya existe una tarea con el correo enviado',
       });
     }
-
-    const tareaNueva = new Tarea(req.body);
-    await tareaNueva.save();
+    //guardamos el nuevo usuario en la BD
+    tarea = new Tarea(req.body);
+    await tarea.save();
     res.status(201).json({
-      message: 'La tarea fue creada correctamente.',
+      mensaje: 'tarea creada',
+      nombreTarea: tarea.nombreTarea,
+      uid: tarea._id,
     });
   } catch (error) {
     console.log(error);
@@ -72,16 +76,6 @@ export const borrarTarea = async (req, res) => {
 
 export const editarTarea = async (req, res) => {
   try {
-    //trabajar con los resultados de la validación
-    const errors = validationResult(req);
-
-    //errors.isEmpty(); true: si está vacío, es false tiene errores
-    //quiero saber si hay errores
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array(),
-      });
-    }
     //buscar en la BD un documento tarea mediante el id y editarlo
     await Tarea.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json({
