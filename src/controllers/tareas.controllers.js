@@ -1,3 +1,4 @@
+import { validationResult } from 'express-validator';
 import Tarea from '../models/tarea';
 
 export const controladorTest = (req, res) => {
@@ -6,6 +7,17 @@ export const controladorTest = (req, res) => {
 
 export const crearTarea = async (req, res) => {
   try {
+    //trabajar con los resultados de la validación
+    const errors = validationResult(req);
+
+    //errors.isEmpty(); true: si está vacío, es false tiene errores
+    //quiero saber si hay errores
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        errors: errors.array(),
+      });
+    }
+
     const tareaNueva = new Tarea(req.body);
     await tareaNueva.save();
     res.status(201).json({
@@ -21,7 +33,7 @@ export const crearTarea = async (req, res) => {
 
 export const obtenerTareas = async (req, res) => {
   try {
-    const tareas = await Tarea.find({}).select('-__v');
+    const tareas = await Tarea.find().select('-__v');
     res.json(tareas);
   } catch (error) {
     console.log(error);
@@ -60,6 +72,16 @@ export const borrarTarea = async (req, res) => {
 
 export const editarTarea = async (req, res) => {
   try {
+    //trabajar con los resultados de la validación
+    const errors = validationResult(req);
+
+    //errors.isEmpty(); true: si está vacío, es false tiene errores
+    //quiero saber si hay errores
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        errors: errors.array(),
+      });
+    }
     //buscar en la BD un documento tarea mediante el id y editarlo
     await Tarea.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json({
