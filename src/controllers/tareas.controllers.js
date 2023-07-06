@@ -72,3 +72,18 @@ export const editarTarea = async (req, res) => {
     });
   }
 };
+
+export const borrarTareas = async (req, res) => {
+  try {
+    //buscar en la BD todos los documentos productos y borrarlo
+    await Tarea.deleteMany();
+    res.status(200).json({
+      mensaje: 'Las tareas fueron eliminada correctamente.',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      mensaje: 'Error, no se pudo borrar las tareas.',
+    });
+  }
+};
