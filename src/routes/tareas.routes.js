@@ -2,7 +2,6 @@ import { Router } from 'express';
 import {
   borrarTarea,
   borrarTareas,
-  controladorTest,
   crearTarea,
   editarTarea,
   obtenerTarea,
@@ -12,7 +11,6 @@ import validarTarea from '../helpers/validarTarea';
 
 const router = new Router();
 
-router.route('/').get(controladorTest);
 router
   .route('/tareas')
   .post(validarTarea, crearTarea)
