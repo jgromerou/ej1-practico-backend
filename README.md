@@ -78,6 +78,10 @@ Ejemplo de Body en el envío de Crear nueva tarea:
     }
 ```
 
+## Repositorio Frontend
+
+[Frontend Lista de Tareas](https://github.com/jgromerou/ej2-practico-backend)
+
 ## Autor
 
 1. Juan Gerardo Romero Uro [github](https://github.com/jgromerou)
