@@ -3,6 +3,8 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import morgan from 'morgan';
 import path from 'path';
+import './src/database/dbConnection';
+import tareasRouter from './src/routes/tareas.routes';
 
 dotenv.config();
 
@@ -22,6 +24,4 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '/public')));
 
 //rutas
-app.get('/prueba', (req, res) => {
-  res.send('Esta es una prueba de mi ruta GET de prueba');
-});
+app.use('/apitareas', tareasRouter);
