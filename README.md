@@ -53,7 +53,7 @@ Sigue estos pasos para clonar y ejecutar la aplicación en tu entorno local:
 
     Esto ejecutará el script definido en el archivo package.json para iniciar el servidor Node.js.
 
-6.  **Accede al servidor:** Abre tu navegador web y visita la siguiente URL: _http://localhost:4000_. El servidor debería cargarse, mostrar el siguiente mensaje: 'Este es un test de mi ruta GET de raíz' y estar lista para usar. Se recomienda usar [Postman](https://www.postman.com/) para las solicitudes al servidor.
+6.  **Accede al servidor:** Abre tu navegador web y visita la siguiente URL: _http://localhost:4000_. El servidor debería cargarse, mostrar el siguiente mensaje: 'Bienvenidos al Backend de Lista de Tareas' y estar lista para usar. Se recomienda usar [Postman](https://www.postman.com/) para las solicitudes al servidor.
 
 ## Llamadas a la API
 
